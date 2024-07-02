@@ -16,13 +16,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Node.js 20
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-
-    - name: Check Node.js version
-      run: node -v
+    - name: Setup Node.js environment
+      run: |
+        curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+        node -v
+        npm -v
 
     - name: Install dependencies
       run: npm install --legacy-peer-deps
