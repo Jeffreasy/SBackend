@@ -13,18 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    - name: Set up Node.js
+    - name: Set up Node.js 20
       uses: actions/setup-node@v3
       with:
         node-version: '20'
+
+    - name: Check Node.js version
+      run: node -v
 
     - name: Install dependencies
       run: npm install --legacy-peer-deps
 
     - name: Run lint
       run: npm run lint
+
     - name: Run tests
       run: npm run test
 
