@@ -20,6 +20,15 @@ export default [
       },
     },
     rules: {
+      // Include rules from eslint:recommended
+      ...eslintPlugin.configs['recommended'].rules,
+
+      // Include rules from @typescript-eslint/recommended
+      ...eslintPlugin.configs['recommended'].rules,
+
+      // Include rules from prettier/recommended
+      ...prettierPlugin.configs.recommended.rules,
+
       'prettier/prettier': [
         'error',
         {
@@ -29,10 +38,5 @@ export default [
         },
       ],
     },
-    extends: [
-      'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:prettier/recommended',
-    ],
   },
 ];
