@@ -1,3 +1,7 @@
+import eslintPlugin from '@typescript-eslint/eslint-plugin';
+import prettierPlugin from 'eslint-plugin-prettier';
+import parser from '@typescript-eslint/parser';
+
 export default [
   {
     ignores: ['node_modules/**'],
@@ -5,11 +9,11 @@ export default [
   {
     files: ['src/**/*.ts'],
     plugins: {
-      '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
-      prettier: require('eslint-plugin-prettier'),
+      '@typescript-eslint': eslintPlugin,
+      prettier: prettierPlugin,
     },
     languageOptions: {
-      parser: require('@typescript-eslint/parser'),
+      parser: parser,
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
