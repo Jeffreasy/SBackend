@@ -21,11 +21,9 @@ export const registreerGebruiker = async (req: Request, res: Response) => {
       wachtwoord: gehashtWachtwoord,
     });
 
-    const token = jwt.sign(
-      { id: gebruiker._id },
-      process.env.JWT_SECRET || 'secret',
-      { expiresIn: '1h' },
-    );
+    const token = jwt.sign({ id: gebruiker._id }, process.env.JWT_SECRET || 'secret', {
+      expiresIn: '1h',
+    });
 
     res.status(201).json({ token });
   } catch (error) {

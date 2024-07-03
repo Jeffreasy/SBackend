@@ -7,9 +7,10 @@
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc",
-    "lint": "eslint src",
+    "lint": "eslint src --ext .ts --fix",
     "test": "jest",
-    "format": "prettier --write 'src/**/*.{ts,js}'"
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint-format": "npm run lint && npm run format"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "glob": "^10.4.2",
     "jest": "^27.0.6",

@@ -14,14 +14,11 @@ dotenv.config();
 const app = express();
 const poort = process.env.PORT || 3000;
 
-// Verbind met MongoDB
 connectDB();
 
-// Middleware
 app.use(express.json());
-app.use(morgan('dev')); // Voegt logging toe voor inkomende verzoeken
+app.use(morgan('dev'));
 
-// Nieuwe middleware voor uitgebreide logging
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log('Ontvangen verzoek:', {
     methode: req.method,
@@ -32,24 +29,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// Routes
 app.use('/api/v1', routes);
 
-// 404 afhandelaar
 app.use((req: Request, res: Response) => {
   res.status(404).send('Sorry, die pagina kunnen we niet vinden!');
 });
 
-// Algemene foutafhandeling
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((fout: Error, req: Request, res: Response, _next: NextFunction) => {
   console.error('Globale error handler:', fout);
-  res.status(500).json({
-    message: 'Er is een serverfout opgetreden',
-    error: fout.message,
-  });
+  res.status(500).json({ message: 'Er is een serverfout opgetreden', error: fout.message });
 });
 
-// Server opstarten
 connectDB()
   .then(() => {
     app.listen(poort, () => {
@@ -58,20 +49,11 @@ connectDB()
       function print(pad: string, laag: Layer) {
         if (laag.route) {
           laag.route.stack.forEach((item: RouteHandler) => {
-            console.log(
-              '%s %s',
-              item.method.toUpperCase().padEnd(6),
-              pad.concat(laag.route.path),
-            );
+            console.log('%s %s', item.method.toUpperCase().padEnd(6), pad.concat(laag.route.path));
           });
         } else if (laag.name === 'router' && laag.handle.stack) {
           laag.handle.stack.forEach((item: Layer) => {
-            print(
-              pad.concat(
-                laag.regexp.source.replace('^', '').replace('/?(?=\\/|$)', ''),
-              ),
-              item,
-            );
+            print(pad.concat(laag.regexp.source.replace('^', '').replace('/?(?=\\/|$)', '')), item);
           });
         }
       }

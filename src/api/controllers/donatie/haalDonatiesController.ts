@@ -6,8 +6,6 @@ export const haalDonaties = async (req: Request, res: Response) => {
     const donaties = await Donatie.find();
     res.status(200).json(donaties);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'Fout bij het ophalen van donaties', error });
+    res.status(500).json({ message: 'Fout bij het ophalen van donaties', error });
   }
 };

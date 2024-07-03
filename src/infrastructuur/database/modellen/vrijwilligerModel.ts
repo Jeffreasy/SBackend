@@ -19,10 +19,7 @@ const VrijwilligerSchema: Schema = new Schema(
       unique: true,
       trim: true,
       lowercase: true,
-      match: [
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-        'Voer een geldig e-mailadres in',
-      ],
+      match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Voer een geldig e-mailadres in'],
     },
     telefoonnummer: {
       type: String,
@@ -33,7 +30,7 @@ const VrijwilligerSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 // Voeg een pre-save hook toe om te debuggen
@@ -42,7 +39,4 @@ VrijwilligerSchema.pre('save', function (next) {
   next();
 });
 
-export default mongoose.model<IVrijwilliger>(
-  'Vrijwilliger',
-  VrijwilligerSchema,
-);
+export default mongoose.model<IVrijwilliger>('Vrijwilliger', VrijwilligerSchema);

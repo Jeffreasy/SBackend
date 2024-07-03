@@ -30,10 +30,7 @@ export const registreerVrijwilliger = async (req: Request, res: Response) => {
       email,
       telefoonnummer,
     });
-    console.log(
-      'Na het aanmaken van nieuwe Vrijwilliger:',
-      nieuweVrijwilliger.toObject(),
-    );
+    console.log('Na het aanmaken van nieuwe Vrijwilliger:', nieuweVrijwilliger.toObject());
 
     const opgeslagenVrijwilliger = await nieuweVrijwilliger.save();
     console.log('Vrijwilliger opgeslagen:', opgeslagenVrijwilliger.toObject());
@@ -48,11 +45,7 @@ export const registreerVrijwilliger = async (req: Request, res: Response) => {
         fout: fout.message,
         details: fout.errors,
       });
-    } else if (
-      fout instanceof mongoose.Error &&
-      'code' in fout &&
-      fout.code === 11000
-    ) {
+    } else if (fout instanceof mongoose.Error && 'code' in fout && fout.code === 11000) {
       res.status(409).json({
         bericht: 'Een vrijwilliger met dit e-mailadres bestaat al',
         fout: fout.message,

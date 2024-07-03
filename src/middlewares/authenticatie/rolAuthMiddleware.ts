@@ -17,24 +17,17 @@ export const checkRole = (roles: string[]) => {
     try {
       const token = req.header('Authorization')?.replace('Bearer ', '');
       if (!token) {
-        return res
-          .status(401)
-          .send({ error: 'Geen token, autorisatie geweigerd' });
+        return res.status(401).send({ error: 'Geen token, autorisatie geweigerd' });
       }
 
-      const decoded = jwt.verify(
-        token,
-        process.env.JWT_SECRET as string,
-      ) as JwtPayload;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
       const gebruiker = await Gebruiker.findById(decoded.id).exec();
       if (!gebruiker || !roles.includes(gebruiker.rol)) {
         return res.status(403).send({ error: 'Toegang geweigerd' });
       }
 
       req.user = {
-        id: gebruiker._id instanceof Types.ObjectId
-          ? gebruiker._id.toString()
-          : gebruiker._id,
+        id: gebruiker._id instanceof Types.ObjectId ? gebruiker._id.toString() : gebruiker._id,
         naam: gebruiker.naam,
         email: gebruiker.email,
         wachtwoord: gebruiker.wachtwoord,
