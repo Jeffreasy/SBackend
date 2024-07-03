@@ -24,9 +24,10 @@
     "nodemon": "^2.0.15",
     "ts-node": "^10.9.2",
     "typescript": "^4.9.5",
-    "eslint": "^7.32.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-@typescript-eslint": "^4.0.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
     "ts-jest": "^27.0.5",
     "jest": "^27.0.6"
   },
