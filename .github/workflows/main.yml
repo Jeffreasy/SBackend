@@ -15,9 +15,9 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -25,11 +25,18 @@ jobs:
         run: npm cache clean --force
       - run: npm ci
       - run: npm run build --if-present
+
+      # ESLint met debugging en logging
       - name: Run ESLint
         run: npm run lint
-        continue-on-error: true # Let op de juiste inspringing hier
-      - name: Print ESLint logs # Let op de juiste inspringing hier
-        run: cat node_modules/.cache/eslint-loader/*.json 
+        env: # Stel de logging niveau in op debug
+          ESLINT_DEBUG: true
+        continue-on-error: true
+
+      # Print ESLint logs (pas het pad indien nodig aan)
+      - name: Print ESLint logs
+        run: find . -name 'eslint-*.log' -exec cat {} \;
+
       - name: Run tests
         run: npm test
 

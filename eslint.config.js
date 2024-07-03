@@ -1,25 +1,24 @@
 module.exports = {
-  root: true, // Zorgt ervoor dat ESLint stopt met zoeken naar configuratiebestanden in bovenliggende mappen.
-  parser: '@typescript-eslint/parser', // Specifieke parser voor TypeScript-code.
+  root: true,
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./tsconfig.json'], // Maakt gebruik van je TypeScript configuratie.
-    tsconfigRootDir: __dirname, // Specificeert de root directory van je TypeScript-project.
-    ecmaVersion: 2021,        // Stel in op de nieuwste ECMAScript-versie die je gebruikt.
-    sourceType: 'module',     // Laat het gebruik van import/export syntax toe.
+    project: ['./tsconfig.json'],
+    tsconfigRootDir: __dirname,
+    ecmaVersion: 2021,
+    sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'prettier'], // Plugins voor TypeScript-specifieke regels en Prettier.
+  plugins: ['@typescript-eslint', 'prettier'],
   extends: [
-    'eslint:recommended',           // Aanbevolen ESLint regels.
-    'plugin:@typescript-eslint/recommended', // Aanbevolen TypeScript-ESLint regels.
-    'plugin:prettier/recommended',    // Integreert Prettier in ESLint.
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   rules: {
-    'prettier/prettier': 'error',    // Fouten rapporteren voor Prettier opmaakproblemen.
-    '@typescript-eslint/no-explicit-any': 'error', // Verbiedt het gebruik van 'any'.
-    '@typescript-eslint/no-unused-vars': 'error', // Verbiedt ongebruikte variabelen.
-    '@typescript-eslint/ban-ts-comment': 'warn',  // Waarschuwt voor het gebruik van @ts-ignore en @ts-nocheck.
-    '@typescript-eslint/no-var-requires': 'off', // Schakelt de regel uit die het gebruik van require() verbiedt (nodig voor CommonJS modules).
-    // Voeg hier eventueel andere regels toe naar je eigen voorkeuren.
+    'prettier/prettier': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-var-requires': 'off',
   },
-  ignorePatterns: ['**/*.js'], // Negeer alle JavaScript-bestanden om conflicten te voorkomen
+  ignorePatterns: ['**/*.js'],
 };
