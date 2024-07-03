@@ -8,30 +8,29 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18, 20]  # Update naar Node.js versie 18 en 20
+        node-version: [18, 20]
 
     steps:
-    - name: Repository uitchecken
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Node.js ${{ matrix.node-version }} instellen
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Afhankelijkheden installeren
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Lint uitvoeren
-      run: npm run lint
+      - name: Run Prettier
+        run: npm run format
 
-    - name: Build uitvoeren
-      run: npm run build
+      - name: Run lint
+        run: npm run lint
 
-    - name: Tests uitvoeren
-      run: npm test
+      - name: Run tests
+        run: npm test
