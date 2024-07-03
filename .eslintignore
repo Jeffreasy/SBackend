@@ -1,5 +1,2 @@
-# .eslintignore
-
-# Je kunt specifieke bestanden of directories uitsluiten, zoals node_modules
 node_modules/
 dist/
