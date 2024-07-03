@@ -25,8 +25,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const DonatieSchema = new mongoose_1.Schema({
-    bedrag: { type: Number, required: true },
+    bedrag: { type: Number, required: true, min: 0 },
     donateurNaam: { type: String, required: true },
     bericht: { type: String },
-});
+    datum: { type: Date, default: Date.now },
+    donateur: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Gebruiker' },
+}, { timestamps: true });
 exports.default = mongoose_1.default.model('Donatie', DonatieSchema);

@@ -25,31 +25,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const VrijwilligerSchema = new mongoose_1.Schema({
-    naam: {
-        type: String,
-        required: [true, 'Naam is verplicht'],
-        trim: true
-    },
+    naam: { type: String, required: true, trim: true },
     email: {
         type: String,
-        required: [true, 'E-mail is verplicht'],
+        required: true,
         unique: true,
         trim: true,
         lowercase: true,
-        match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Voer een geldig e-mailadres in']
+        match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Voer een geldig e-mailadres in'],
     },
     telefoonnummer: {
         type: String,
-        // required: [true, 'Telefoonnummer is verplicht'],  // Commentaar deze regel uit
         trim: true,
-        match: [/^[0-9]{10}$/, 'Voer een geldig telefoonnummer in (10 cijfers)']
+        match: [/^[0-9]{10}$/, 'Voer een geldig telefoonnummer in (10 cijfers)'],
     },
-}, {
-    timestamps: true
-});
-// Voeg een pre-save hook toe om te debuggen
-VrijwilligerSchema.pre('save', function (next) {
-    console.log('Pre-save hook: ', this.toObject());
-    next();
-});
+    interesses: [{ type: String }],
+}, { timestamps: true });
 exports.default = mongoose_1.default.model('Vrijwilliger', VrijwilligerSchema);

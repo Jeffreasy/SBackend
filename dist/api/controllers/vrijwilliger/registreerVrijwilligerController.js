@@ -24,14 +24,22 @@ const registreerVrijwilliger = (req, res) => __awaiter(void 0, void 0, void 0, f
         console.log('Types van velden:', {
             naam: typeof naam,
             email: typeof email,
-            telefoonnummer: typeof telefoonnummer
+            telefoonnummer: typeof telefoonnummer,
         });
         // Controleer of alle vereiste velden aanwezig zijn
         if (!naam || !email || !telefoonnummer) {
             throw new Error('Naam, email en telefoonnummer zijn verplicht');
         }
-        console.log('Vóór het aanmaken van nieuwe Vrijwilliger:', { naam, email, telefoonnummer });
-        const nieuweVrijwilliger = new vrijwilligerModel_1.default({ naam, email, telefoonnummer });
+        console.log('Vóór het aanmaken van nieuwe Vrijwilliger:', {
+            naam,
+            email,
+            telefoonnummer,
+        });
+        const nieuweVrijwilliger = new vrijwilligerModel_1.default({
+            naam,
+            email,
+            telefoonnummer,
+        });
         console.log('Na het aanmaken van nieuwe Vrijwilliger:', nieuweVrijwilliger.toObject());
         const opgeslagenVrijwilliger = yield nieuweVrijwilliger.save();
         console.log('Vrijwilliger opgeslagen:', opgeslagenVrijwilliger.toObject());
@@ -41,14 +49,24 @@ const registreerVrijwilliger = (req, res) => __awaiter(void 0, void 0, void 0, f
         console.error('Fout in registreerVrijwilliger:', fout);
         if (fout instanceof mongoose_1.default.Error.ValidationError) {
             console.log('Validatiefout details:', fout.errors);
-            res.status(400).json({ bericht: 'Validatiefout', fout: fout.message, details: fout.errors });
+            res.status(400).json({
+                bericht: 'Validatiefout',
+                fout: fout.message,
+                details: fout.errors,
+            });
         }
         else if (fout instanceof mongoose_1.default.Error && 'code' in fout && fout.code === 11000) {
-            res.status(409).json({ bericht: 'Een vrijwilliger met dit e-mailadres bestaat al', fout: fout.message });
+            res.status(409).json({
+                bericht: 'Een vrijwilliger met dit e-mailadres bestaat al',
+                fout: fout.message,
+            });
         }
         else {
             console.error('Onverwachte fout:', fout);
-            res.status(500).json({ bericht: 'Fout bij het registreren van vrijwilliger', fout: fout instanceof Error ? fout.message : String(fout) });
+            res.status(500).json({
+                bericht: 'Fout bij het registreren van vrijwilliger',
+                fout: fout instanceof Error ? fout.message : String(fout),
+            });
         }
     }
 });
@@ -60,7 +78,10 @@ const haalVrijwilligersOp = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
     catch (fout) {
         console.error('Fout bij het ophalen van vrijwilligers:', fout);
-        res.status(500).json({ bericht: 'Fout bij het ophalen van vrijwilligers', fout: fout instanceof Error ? fout.message : String(fout) });
+        res.status(500).json({
+            bericht: 'Fout bij het ophalen van vrijwilligers',
+            fout: fout instanceof Error ? fout.message : String(fout),
+        });
     }
 });
 exports.haalVrijwilligersOp = haalVrijwilligersOp;

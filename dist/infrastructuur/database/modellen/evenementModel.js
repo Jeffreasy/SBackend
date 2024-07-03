@@ -28,5 +28,8 @@ const EvenementSchema = new mongoose_1.Schema({
     naam: { type: String, required: true },
     datum: { type: Date, required: true },
     locatie: { type: String, required: true },
-});
+    beschrijving: { type: String },
+    aanmeldingen: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Gebruiker' }],
+    organisator: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Gebruiker' },
+}, { timestamps: true });
 exports.default = mongoose_1.default.model('Evenement', EvenementSchema);

@@ -30,7 +30,9 @@ const registreerGebruiker = (req, res) => __awaiter(void 0, void 0, void 0, func
             email,
             wachtwoord: gehashtWachtwoord,
         });
-        const token = jsonwebtoken_1.default.sign({ id: gebruiker._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ id: gebruiker._id }, process.env.JWT_SECRET || 'secret', {
+            expiresIn: '1h',
+        });
         res.status(201).json({ token });
     }
     catch (error) {

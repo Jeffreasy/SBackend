@@ -11,34 +11,29 @@ const morgan_1 = __importDefault(require("morgan"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const poort = process.env.PORT || 3000;
-// Verbind met MongoDB
 (0, database_1.default)();
-// Middleware
 app.use(express_1.default.json());
-app.use((0, morgan_1.default)('dev')); // Voegt logging toe voor inkomende verzoeken
-// Nieuwe middleware voor uitgebreide logging
-app.use((req, res, volgende) => {
+app.use((0, morgan_1.default)('dev'));
+app.use((req, res, next) => {
     console.log('Ontvangen verzoek:', {
         methode: req.method,
         url: req.url,
         body: req.body,
-        headers: req.headers
+        headers: req.headers,
     });
-    volgende();
+    next();
 });
-// Routes
 app.use('/api/v1', routes_1.default);
-// 404 afhandelaar
-app.use((req, res, volgende) => {
-    res.status(404).send("Sorry, die pagina kunnen we niet vinden!");
+app.use((req, res) => {
+    res.status(404).send('Sorry, die pagina kunnen we niet vinden!');
 });
-// Algemene foutafhandeling
-app.use((fout, req, res, volgende) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((fout, req, res, _next) => {
     console.error('Globale error handler:', fout);
     res.status(500).json({ message: 'Er is een serverfout opgetreden', error: fout.message });
 });
-// Server opstarten
-(0, database_1.default)().then(() => {
+(0, database_1.default)()
+    .then(() => {
     app.listen(poort, () => {
         console.log(`Server draait op poort ${poort}`);
         console.log('Beschikbare routes:');
@@ -50,7 +45,7 @@ app.use((fout, req, res, volgende) => {
             }
             else if (laag.name === 'router' && laag.handle.stack) {
                 laag.handle.stack.forEach((item) => {
-                    print(pad.concat(laag.regexp.source.replace("^", "").replace("/?(?=\\/|$)", "")), item);
+                    print(pad.concat(laag.regexp.source.replace('^', '').replace('/?(?=\\/|$)', '')), item);
                 });
             }
         }
@@ -58,7 +53,8 @@ app.use((fout, req, res, volgende) => {
             print('', item);
         });
     });
-}).catch(fout => {
+})
+    .catch((fout) => {
     console.error('Fout bij het starten van de server:', fout);
     process.exit(1);
 });

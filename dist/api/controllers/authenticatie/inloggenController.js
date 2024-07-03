@@ -27,7 +27,9 @@ const loginGebruiker = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!isMatch) {
             return res.status(400).json({ message: 'Ongeldige inloggegevens' });
         }
-        const token = jsonwebtoken_1.default.sign({ id: gebruiker._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ id: gebruiker._id }, process.env.JWT_SECRET || 'secret', {
+            expiresIn: '1h',
+        });
         res.status(200).json({ token });
     }
     catch (error) {

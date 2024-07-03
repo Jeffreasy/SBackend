@@ -21,7 +21,9 @@ const createDeelnemer = (req, res) => __awaiter(void 0, void 0, void 0, function
     const newDeelnemer = req.body;
     try {
         const result = yield deelnemersCollection.insertOne(newDeelnemer);
-        const createdDeelnemer = yield deelnemersCollection.findOne({ _id: result.insertedId });
+        const createdDeelnemer = yield deelnemersCollection.findOne({
+            _id: result.insertedId,
+        });
         res.status(201).json(createdDeelnemer);
     }
     catch (error) {
