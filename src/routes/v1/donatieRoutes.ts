@@ -1,11 +1,12 @@
-import { Router } from 'express';
+import express from 'express';
 import { maakDonatie } from '../../api/controllers/donatie/maakDonatieController';
 import { haalDonaties } from '../../api/controllers/donatie/haalDonatiesController';
 import { jwtAuthMiddleware } from '../../middlewares/authenticatie/jwtAuthMiddleware';
+import { checkRole } from '../../middlewares/authenticatie/rolAuthMiddleware';
 
-const router = Router();
+const router = express.Router();
 
-router.post('/donaties', jwtAuthMiddleware, maakDonatie);
-router.get('/donaties', jwtAuthMiddleware, haalDonaties);
+router.post('/donaties', jwtAuthMiddleware, checkRole(['admin', 'donateur']), maakDonatie);
+router.get('/donaties', jwtAuthMiddleware, checkRole(['admin']), haalDonaties);
 
 export default router;

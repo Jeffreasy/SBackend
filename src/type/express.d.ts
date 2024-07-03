@@ -1,9 +1,7 @@
-import { Request } from 'express';
+import { IGebruiker } from '../infrastructuur/database/modellen/gebruikerModel';
 
-interface User {
+interface User extends IGebruiker {
   id: string;
-  email: string;
-  // Add other user properties as needed
 }
 
 declare module 'express-serve-static-core' {
