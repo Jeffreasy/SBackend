@@ -1,1 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const maakDonatieController_1 = require("../../api/controllers/donatie/maakDonatieController");
+const haalDonatiesController_1 = require("../../api/controllers/donatie/haalDonatiesController");
+const jwtAuthMiddleware_1 = require("../../middlewares/authenticatie/jwtAuthMiddleware");
+const router = (0, express_1.Router)();
+router.post('/donaties', jwtAuthMiddleware_1.jwtAuthMiddleware, maakDonatieController_1.maakDonatie);
+router.get('/donaties', jwtAuthMiddleware_1.jwtAuthMiddleware, haalDonatiesController_1.haalDonaties);
+exports.default = router;
