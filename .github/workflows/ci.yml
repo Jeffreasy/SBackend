@@ -2,11 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
@@ -14,22 +12,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.x] # Je kunt hier meer versies toevoegen als je wilt
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3  # Update naar de nieuwste versie van checkout actie
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3  # Update naar de nieuwste versie van setup-node actie
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Run tests
-        run: npm test
+          cache: 'npm'  # Cachen van dependencies voor snellere builds
+      - run: npm ci  # Gebruik npm ci in plaats van npm install in CI
+      - run: npm run build --if-present # Bouw alleen als er een build script is
+      - run: npm run lint
+      - run: npm test
