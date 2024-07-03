@@ -18,6 +18,8 @@
     "mongoose": "^6.0.12"
   },
   "devDependencies": {
+    "@eslint/config-array": "^0.17.0",
+    "@eslint/object-schema": "^2.1.4",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.1",
@@ -27,6 +29,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "glob": "^10.4.2",
     "jest": "^27.0.6",
+    "lru-cache": "^10.3.0",
     "nodemon": "^2.0.15",
     "rimraf": "^5.0.7",
     "ts-jest": "^27.0.5",
