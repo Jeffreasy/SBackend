@@ -1,7 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-export const jwtAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
+interface JwtPayload {
+  id: string;
+}
+
+interface RequestWithUser extends Request {
+  user?: JwtPayload;
+}
+
+export const jwtAuthMiddleware = (
+  req: RequestWithUser,
+  res: Response,
+  next: NextFunction,
+) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -11,8 +23,11 @@ export const jwtAuthMiddleware = (req: Request, res: Response, next: NextFunctio
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    (req as any).user = decoded;  // TypeScript should now recognize 'user' as a valid property
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET as string,
+    ) as JwtPayload;
+    req.user = decoded;
     next();
   } catch (error) {
     res.status(401).json({ message: 'Invalid token' });

@@ -6,7 +6,12 @@ import { checkRole } from '../../middlewares/authenticatie/rolAuthMiddleware';
 
 const router = express.Router();
 
-router.post('/donaties', jwtAuthMiddleware, checkRole(['admin', 'donateur']), maakDonatie);
+router.post(
+  '/donaties',
+  jwtAuthMiddleware,
+  checkRole(['admin', 'donateur']),
+  maakDonatie,
+);
 router.get('/donaties', jwtAuthMiddleware, checkRole(['admin']), haalDonaties);
 
 export default router;

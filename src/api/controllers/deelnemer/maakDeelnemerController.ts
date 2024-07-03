@@ -9,7 +9,9 @@ export const createDeelnemer = async (req: Request, res: Response) => {
   const newDeelnemer = req.body;
   try {
     const result = await deelnemersCollection.insertOne(newDeelnemer);
-    const createdDeelnemer = await deelnemersCollection.findOne({ _id: result.insertedId });
+    const createdDeelnemer = await deelnemersCollection.findOne({
+      _id: result.insertedId,
+    });
     res.status(201).json(createdDeelnemer);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });

@@ -15,11 +15,13 @@ module.exports = [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: "module",
+        project: "./tsconfig.json",
       },
     },
     rules: {
       "prettier/prettier": "error",
       ...require("@typescript-eslint/eslint-plugin").configs.recommended.rules,
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
 ];

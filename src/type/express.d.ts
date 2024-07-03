@@ -1,6 +1,6 @@
 import { IGebruiker } from '../infrastructuur/database/modellen/gebruikerModel';
 
-interface User extends IGebruiker {
+export interface User extends IGebruiker {
   id: string;
 }
 
