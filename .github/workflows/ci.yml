@@ -16,19 +16,22 @@ jobs:
         node-version: [14, 16]
 
     steps:
-    - name: Checkout repository
+    - name: Repository uitchecken
       uses: actions/checkout@v2
 
-    - name: Set up Node.js ${{ matrix.node-version }}
+    - name: Node.js ${{ matrix.node-version }} instellen
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
+    - name: Afhankelijkheden installeren
       run: npm install
 
-    - name: Run lint
+    - name: Lint uitvoeren
       run: npm run lint
 
-    - name: Run tests
+    - name: Build uitvoeren
+      run: npm run build
+
+    - name: Tests uitvoeren
       run: npm test
