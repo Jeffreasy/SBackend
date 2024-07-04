@@ -4,8 +4,6 @@ module.exports = {
   parserOptions: {
     project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname,
-    ecmaVersion: 2021,
-    sourceType: 'module',
   },
   plugins: ['@typescript-eslint', 'prettier'],
   extends: [
@@ -15,10 +13,5 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/ban-ts-comment': 'warn',
-    '@typescript-eslint/no-var-requires': 'off',
-  },
-  ignorePatterns: ['**/*.js'],
+  }
 };

@@ -25,18 +25,19 @@ jobs:
         run: npm cache clean --force
       - run: npm ci
       - run: npm run build --if-present
-
-      # ESLint met debugging en logging
       - name: Run ESLint
         run: npm run lint
-        env: # Stel de logging niveau in op debug
+        env:
           ESLINT_DEBUG: true
         continue-on-error: true
 
-      # Print ESLint logs (pas het pad indien nodig aan)
+      # Print ESLint logs (output file)
       - name: Print ESLint logs
-        run: find . -name 'eslint-*.log' -exec cat {} \;
+        run: cat ./eslint-results.json
 
+      # Run tests (met logging)
       - name: Run tests
-        run: npm test
+        run: npm test -- --verbose
 
+      - name: Audit fix
+        run: npm audit fix

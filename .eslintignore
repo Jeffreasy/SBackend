@@ -1,3 +1,4 @@
 node_modules/
 dist/
 build/
+# src/**/*.{ts,js,tsx,jsx}  # Deze regel is nu uitgecommentarieerd
