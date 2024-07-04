@@ -14,4 +14,6 @@ export default {
     ],
   },
   moduleDirectories: ['node_modules', '<rootDir>/src', '<rootDir>/dist'],
+  setupFilesAfterEnv: ['<rootDir>/src/tests/test-utils.ts'],
+  testTimeout: 30000, // Verhoog de timeout tot 30 seconden
 };

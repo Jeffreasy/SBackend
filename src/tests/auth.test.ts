@@ -1,21 +1,10 @@
 import request from 'supertest';
 import app from '../app';
-import mongoose from 'mongoose';
 import Gebruiker from '../infrastructuur/database/modellen/gebruikerModel';
 import bcrypt from 'bcryptjs';
 import { registerAndLogin, RegisterAndLoginResult } from './test-utils';
 
 describe('Authenticatie Endpoints', () => {
-  // Voordat alle tests beginnen, maak verbinding met de testdatabase
-  beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI_TEST || 'mongodb://localhost:27017/testdb');
-  });
-
-  // Na alle tests, sluit de databaseverbinding
-  afterAll(async () => {
-    await mongoose.connection.close();
-  });
-
   describe('POST /api/v1/authenticatie/registreren', () => {
     it('zou een nieuwe gebruiker moeten registreren', async () => {
       const res = await request(app)
