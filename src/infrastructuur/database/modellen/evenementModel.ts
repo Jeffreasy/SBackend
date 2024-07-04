@@ -1,24 +1,24 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IEvenement extends Document {
-  naam: string;
+  titel: string;
+  beschrijving: string;
   datum: Date;
   locatie: string;
-  beschrijving?: string; // Optionele beschrijving
-  aanmeldingen: mongoose.Schema.Types.ObjectId[]; // Array van user IDs
-  organisator: mongoose.Schema.Types.ObjectId; // Relatie met Gebruiker model
+  organisator: mongoose.Schema.Types.ObjectId;
+  createdAt: Date;
 }
 
 const EvenementSchema: Schema = new Schema(
   {
-    naam: { type: String, required: true },
+    titel: { type: String, required: true },
+    beschrijving: { type: String, required: true },
     datum: { type: Date, required: true },
     locatie: { type: String, required: true },
-    beschrijving: { type: String },
-    aanmeldingen: [{ type: Schema.Types.ObjectId, ref: 'Gebruiker' }],
-    organisator: { type: Schema.Types.ObjectId, ref: 'Gebruiker' },
+    organisator: { type: mongoose.Schema.Types.ObjectId, ref: 'Gebruiker' },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<IEvenement>('Evenement', EvenementSchema);
+const Evenement = mongoose.models.Evenement || mongoose.model<IEvenement>('Evenement', EvenementSchema);
+export default Evenement;
