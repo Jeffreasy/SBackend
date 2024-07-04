@@ -28,4 +28,5 @@ const VrijwilligerSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<IVrijwilliger>('Vrijwilliger', VrijwilligerSchema);
+const Vrijwilliger = mongoose.models.Vrijwilliger || mongoose.model<IVrijwilliger>('Vrijwilliger', VrijwilligerSchema);
+export default Vrijwilliger;
