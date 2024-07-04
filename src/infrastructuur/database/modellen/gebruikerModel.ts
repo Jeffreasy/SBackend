@@ -31,4 +31,7 @@ GebruikerSchema.pre('save', async function (next) {
   next();
 });
 
-export default mongoose.model<IGebruiker>('Gebruiker', GebruikerSchema);
+// Voorkom overschrijven van het model
+const Gebruiker = mongoose.models.Gebruiker || mongoose.model<IGebruiker>('Gebruiker', GebruikerSchema);
+
+export default Gebruiker;
